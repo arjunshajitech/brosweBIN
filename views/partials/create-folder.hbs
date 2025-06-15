@@ -1,0 +1,32 @@
+<div class="modal">
+  <div class="modal-content">
+    {{!-- <h3>Create Folder</h3> --}}
+    <div class="form-group">
+      <input
+        type="text"
+        placeholder="Folder name"
+        @keypress.enter="createFolder"
+        ref="folderInput"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="number"
+        placeholder="pin"
+        @keypress.enter="createFolder"
+        ref="folderInput"
+      />
+    </div>
+    <div class="modal-buttons">
+      <button class="modal-btn" id="folder-cancel">Cancel</button>
+      <button class="modal-btn">Create</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.getElementById("folder-cancel").addEventListener("click", function () {
+    window.location.href = "/";
+  });
+</script>

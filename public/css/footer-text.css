@@ -1,0 +1,20 @@
+.footer-text-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+
+    .footer-text {
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        font-style: italic;
+    }
+
+    .footer-text-name {
+        font-weight: bold;
+        font-style: italic;
+    }
+}

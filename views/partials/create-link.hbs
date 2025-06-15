@@ -1,0 +1,32 @@
+<div class="modal">
+  <div class="modal-content">
+    {{!-- <h3>Add Link</h3> --}}
+    <div class="form-group">
+      <input
+        type="url"
+        v-model="linkUrl"
+        placeholder="https://example.com"
+        @keypress.enter="addLink"
+        ref="linkInput"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="number"
+        placeholder="pin"
+        @keypress.enter="createFolder"
+        ref="folderInput"
+      />
+    </div>
+    <div class="modal-buttons">
+      <button class="modal-btn" id="link-cancel">Cancel</button>
+      <button class="modal-btn">Add</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("link-cancel").addEventListener("click", function () {
+    window.location.href = "/";
+  });
+</script>

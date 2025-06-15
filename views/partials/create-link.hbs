@@ -13,7 +13,7 @@
     <div class="form-group">
       <input
         type="number"
-        placeholder="pin"
+        placeholder="Secret Pin"
         @keypress.enter="createFolder"
         ref="folderInput"
       />
@@ -27,6 +27,6 @@
 
 <script>
   document.getElementById("link-cancel").addEventListener("click", function () {
-    window.location.href = "/";
+    window.location.href = "/links";
   });
 </script>

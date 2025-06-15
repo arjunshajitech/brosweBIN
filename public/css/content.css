@@ -117,3 +117,9 @@
         max-width: 200px;
     }
 }
+
+.delete-folder {
+    svg {
+        color: red;
+    }
+}

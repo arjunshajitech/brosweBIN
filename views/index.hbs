@@ -7,8 +7,14 @@
 {{> links data=data}}
 {{/if}}
 
+
+
 {{#if addLink}}
   {{> create-link}}
+{{/if}}
+
+{{#if deleteFolder}}
+  {{> delete-folder}}
 {{/if}}
 
 {{#if createFolder}}

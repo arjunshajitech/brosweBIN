@@ -8,6 +8,13 @@
     overflow-x: hidden;
 }
 
+.title-no-data-text {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    color: #0066cc;
+}
+
 .item {
     display: flex;
     align-items: center;

@@ -1,32 +1,50 @@
 <div class="modal">
   <div class="modal-content">
-    {{!-- <h3>Add Link</h3> --}}
-    <div class="form-group">
-      <input
-        type="url"
-        v-model="linkUrl"
-        placeholder="https://example.com"
-        @keypress.enter="addLink"
-        ref="linkInput"
-      />
-    </div>
-    <div class="form-group">
-      <input
-        type="number"
-        placeholder="Secret Pin"
-        @keypress.enter="createFolder"
-        ref="folderInput"
-      />
-    </div>
-    <div class="modal-buttons">
-      <button class="modal-btn" id="link-cancel">Cancel</button>
-      <button class="modal-btn">Add</button>
-    </div>
+    <form id="add-link-form">
+      <div class="form-group">
+        <input type="url" name="link" placeholder="https://example.com" 
+          ref="linkInput" required/>
+      </div>
+      <div class="form-group">
+        <input type="number" name="pin" placeholder="Secret Pin"  ref="folderInput" required/>
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-btn" id="link-cancel">Cancel</button>
+        <button class="modal-btn">Add</button>
+      </div>
+    </form>
   </div>
 </div>
 
 <script>
+  folderId = urlParams.get("id");
   document.getElementById("link-cancel").addEventListener("click", function () {
-    window.location.href = "/links";
+    window.location.href = "/links?id=" + folderId;
   });
+  document.getElementById("add-link-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const link = e.target.link.value;
+      const pin = e.target.pin.value;
+      const urlParams = new URLSearchParams(window.location.search);
+      const folderId = urlParams.get("id");
+
+      try {
+        const response = await fetch("/api/v1/folder/add-link", {
+          method: "POST", headers: {
+            "Content-Type": "application/json",
+          }, body: JSON.stringify({
+            folderID: folderId, pin: pin, link: link
+          }),
+        }); if (response.status === 200) {
+          window.location.href = "/links?id=" + folderId;
+        } else {
+          const errorData = await response.json();
+          alert(errorData.error); 
+          window.location.href = "/links?id=" + folderId;
+        }
+      } catch (error) {
+        console.error("Error:", error); 
+        alert("Failed to create folder.");
+      }
+    });
 </script>

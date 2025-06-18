@@ -1,62 +1,40 @@
 <div class="content">
   <div class="item">
-    <svg
-      class="item-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="200"
-      height="200"
-      viewBox="0 0 24 24"
-    ><path
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.5"
+    <svg class="item-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
         d="M2.36 14.597c-.375-2.072-.563-3.108-.03-3.81q.054-.07.114-.135C3.037 10 4.087 10 6.186 10h11.628c2.1 0 3.15 0 3.742.652q.06.065.113.136c.534.701.346 1.737-.03 3.809c-.54 2.978-.81 4.467-1.828 5.382q-.104.095-.215.18c-1.08.841-2.59.841-5.608.841h-3.976c-3.019 0-4.528 0-5.608-.841a4 4 0 0 1-.215-.18c-1.018-.915-1.288-2.404-1.828-5.382M8.02 5.111h7.787c1.309 0 2.949-.188 3.79 1.037C20 6.737 20 8.361 20 10m-7.987-4.889l-.763-1.487c-.268-.522-.519-1.154-1.067-1.44C9.83 2 9.403 2 8.551 2c-2 0-3 0-3.668.545c-1.117.913-.857 2.785-.857 4.056V10"
-        color="currentColor"
-      /></svg>
+        color="currentColor" />
+    </svg>
     <div class="item-info">
-      <div class="item-name">Projects</div>
+      <div class="item-name">{{data.name}}</div>
     </div>
   </div>
 
+  {{#each data.links}}
   <div class="item-link">
-    <svg
-      class="item-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="200"
-      height="200"
-      viewBox="0 0 24 24"
-    ><path
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.5"
+    <svg class="item-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
         d="M11.099 3c-3.65.007-5.56.096-6.781 1.318C3 5.636 3 7.757 3 12c0 4.242 0 6.364 1.318 7.682S7.757 21 11.998 21c4.243 0 6.364 0 7.682-1.318c1.22-1.221 1.31-3.133 1.317-6.782m-.441-9.404L11.05 13.06m9.507-9.563c-.494-.494-3.822-.448-4.525-.438m4.525.438c.494.495.448 3.827.438 4.531"
-        color="currentColor"
-      /></svg>
+        color="currentColor" />
+    </svg>
     <div class="item-info">
-      <div onclick="window.open('https://gitlab.com', '_blank')"
-        class="item-url"
-      >https://stackoverflow.com/questions/44186119/issue-with-handlebars-hide-show-button-onclick</div>
+      <div onclick="window.open('{{url}}', '_blank')" class="item-url">{{url}}</div>
     </div>
-    <div class="delete-folder" onclick="deleteFolder('{{this._id}}')">
-      <svg
-        class="item-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="200"
-        height="200"
-        viewBox="0 0 24 24"
-      ><path
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
+    <div class="delete-folder" onclick="deleteLink('{{../data._id}}', '{{id}}')">
+      <svg class="item-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           d="m19.5 5.5l-.62 10.025c-.158 2.561-.237 3.842-.88 4.763a4 4 0 0 1-1.2 1.128c-.957.584-2.24.584-4.806.584c-2.57 0-3.855 0-4.814-.585a4 4 0 0 1-1.2-1.13c-.642-.922-.72-2.205-.874-4.77L4.5 5.5M3 5.5h18m-4.944 0l-.683-1.408c-.453-.936-.68-1.403-1.071-1.695a2 2 0 0 0-.275-.172C13.594 2 13.074 2 12.035 2c-1.066 0-1.599 0-2.04.234a2 2 0 0 0-.278.18c-.395.303-.616.788-1.058 1.757L8.053 5.5m1.447 11v-6m5 6v-6"
-          color="currentColor"
-        /></svg>
+          color="currentColor" />
+      </svg>
     </div>
   </div>
+  {{/each}}
 </div>
+
+<script>
+  const deleteLink = (folderID,ID) => {
+    console.log(`Listing links for ID: ${ID}`);
+     window.location.href =
+      `?q=delete-link&id=${folderID}&linkID=${ID}`;
+  };
+</script>

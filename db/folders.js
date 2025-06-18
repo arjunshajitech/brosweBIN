@@ -1,7 +1,6 @@
 import { client, dbName, collectionFolders } from "./client.js";
 import { ObjectId } from "mongodb";
 
-
 export async function listAllFolders() {
   try {
     const db = client.db(dbName);
@@ -13,6 +12,18 @@ export async function listAllFolders() {
   }
 }
 
+export async function getFolderById(id) {
+  try {
+    const db = client.db(dbName);
+    const folder = await db
+      .collection(collectionFolders)
+      .findOne({ _id: ObjectId.createFromHexString(id) });
+    return folder;
+  } catch (error) {
+    console.error("Error fetching folder by ID:", error);
+    throw error;
+  }
+}
 
 export async function getFolderByName(name) {
   try {
@@ -23,6 +34,22 @@ export async function getFolderByName(name) {
     return folder;
   } catch (error) {
     console.error("Error fetching folder by name:", error);
+    throw error;
+  }
+}
+
+export async function updateFolder(folderId, updateData) {
+  try {
+    const db = client.db(dbName);
+    const result = await db
+      .collection(collectionFolders)
+      .updateOne(
+        { _id: ObjectId.createFromHexString(folderId) },
+        { $set: updateData }
+      );
+    return result;
+  } catch (error) {
+    console.error("Error updating folder:", error);
     throw error;
   }
 }

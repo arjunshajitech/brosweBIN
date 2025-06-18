@@ -9,8 +9,11 @@ import {
   indexFolder,
   getFolderByName,
   deleteFolder,
+  updateFolder,
+  getFolderById,
 } from "./db/folders.js";
 import { PORT, AUTH_PIN } from "./config/env.js";
+import { UUID } from "mongodb";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -66,21 +69,83 @@ app.get("/", async (req, res) => {
   }
 });
 
-let data = [];
-
-app.get("/links", (req, res) => {
+app.get("/links", async (req, res) => {
   const query = req.query.q;
+  let id = req.query.id;
+  let data = await getFolderById(id);
   if (query && query === "add-link") {
     res.render("index", {
       data: data,
       title: false,
       addLink: true,
     });
+  } else if (query && query === "delete-link") {
+    res.render("index", {
+      data: data,
+      title: false,
+      deleteLink: true,
+    });
   } else {
     res.render("index", {
       data: data,
       title: false,
     });
+  }
+});
+
+app.delete(API_V1 + "/folder/remove-link", async (req, res) => {
+  const { folderID, linkID } = req.body;
+  if (!folderID || !linkID) {
+    return res
+      .status(400)
+      .json({ error: "Folder ID and link ID are required." });
+  }
+
+  try {
+    const folder = await getFolderById(folderID);
+    if (!folder) {
+      return res.status(404).json({ error: "Folder not found." });
+    }
+
+    const linkIndex = folder.links.findIndex((link) => link.id === linkID);
+    if (linkIndex === -1) {
+      return res.status(404).json({ error: "Link not found." });
+    }
+
+    folder.links.splice(linkIndex, 1);
+    await updateFolder(folderID, folder);
+    res.status(204).json({ message: "Link removed successfully." });
+  } catch (error) {
+    console.error("Error removing link:", error);
+    res.status(500).json({ error: "Failed to remove link." });
+  }
+});
+
+app.post(API_V1 + "/folder/add-link", async (req, res) => {
+  const { folderID, link } = req.body;
+  if (!folderID || !link) {
+    return res.status(400).json({ error: "Folder ID and link are required." });
+  }
+
+  try {
+    const folder = await getFolderById(folderID);
+    if (!folder) {
+      return res.status(404).json({ error: "Folder not found." });
+    }
+
+    folder.links.push({
+      id: new UUID().toString(),
+      title: link,
+      url: link,
+      addedAt: new Date(),
+      votes: 0,
+      pinned: false,
+    });
+    await updateFolder(folderID, folder);
+    res.status(200).json({ message: "Link added successfully." });
+  } catch (error) {
+    console.error("Error adding link:", error);
+    res.status(500).json({ error: "Failed to add link." });
   }
 });
 

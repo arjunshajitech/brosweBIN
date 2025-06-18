@@ -2,16 +2,17 @@
     padding: 16px;
     max-width: 800px;
     margin: 0 auto;
-    min-height: 70vh;      
+    min-height: 70vh;
     max-height: 70vh;
-    overflow-y: auto;  
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
 .title-no-data-text {
     text-align: center;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
+    font-family: "Spline Sans Mono", monospace;
+
+    : 500;
     color: #0066cc;
 }
 
@@ -43,8 +44,8 @@
 
 .item-icon {
     margin-right: 12px;
-    width: 25px;
-    height: 25px;
+    width: 18px;
+    height: 18px;
     /* flex-shrink: 0;
     fill: currentColor; */
 }
@@ -55,14 +56,13 @@
 }
 
 .item-name {
-    font-weight: 400;
+    color: #787774;
     margin-bottom: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 500px;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 600;
+    font-family: "Spline Sans Mono", monospace;
     font-size: 16px;
 }
 
@@ -74,8 +74,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 300px;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
+    font-family: "Spline Sans Mono", monospace;
+
+    : 500;
     font-size: 16px;
 }
 

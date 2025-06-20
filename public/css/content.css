@@ -2,8 +2,8 @@
     padding: 16px;
     max-width: 800px;
     margin: 0 auto;
-    min-height: 80vh;
-    max-height: 80vh;
+    min-height: 70vh;
+    max-height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -64,8 +64,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 500px;
-    font-family: "Spline Sans Mono", monospace;
+    font-family: "Cascadia Mono", sans-serif;
     font-size: 16px;
+}
+
+.item-name::first-letter {
+    text-transform: uppercase;
 }
 
 .item-url {

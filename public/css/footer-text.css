@@ -8,13 +8,11 @@
 
     .footer-text {
         font-size: 16px;
-        : 500;
         cursor: pointer;
         font-style: italic;
     }
 
     .footer-text-name {
-        : bold;
         font-style: italic;
     }
 }

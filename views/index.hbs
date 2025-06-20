@@ -1,12 +1,13 @@
 {{> navbar title=title}}
 
 {{#if title}}
-{{> search}}
-{{> title data=data}}
+  {{#if data}}
+    {{> search}}
+  {{/if}}
+  {{> title data=data}}
 {{else}}
-{{> links data=data}}
+  {{> links data=data}}
 {{/if}}
-
 
 
 {{#if addLink}}

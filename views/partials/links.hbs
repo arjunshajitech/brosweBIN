@@ -9,7 +9,11 @@
       <div class="item-name">{{data.name}}</div>
     </div>
   </div>
-
+  {{#unless data.links}}
+  <div class="no-links">
+    <p>Oops, nothing here! <span id="nothing-link" class="item-url"> Create first entry!</span></p>
+  </div>
+  {{/unless}}
   {{#each data.links}}
   <div class="item-link">
     <svg class="item-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
@@ -37,4 +41,7 @@
      window.location.href =
       `?q=delete-link&id=${folderID}&linkID=${ID}`;
   };
+
+  document.getElementById("nothing-link")?.addEventListener("click", function () {
+  window.location.href = "?q=add-link&id=" + folderId; });
 </script>

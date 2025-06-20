@@ -18,9 +18,11 @@
     </div>
   </div>
   {{/each}}
-  {{!-- {{#unless data.length}}
-  <p class="title-no-data-text">Be the first to create one and start organizing your items!</p>
-  {{/unless}} --}}
+  {{#unless data}}
+  <div class="no-links">
+    <p>Oops, nothing here! <span id="nothing-folder" class="item-url"> Create first entry!</span></p>
+  </div>
+  {{/unless}}
 
 </div>
 
@@ -32,4 +34,7 @@
     console.log(`Listing links for ID: ${id}`); window.location.href =
       `?q=delete-folder&id=${id}`;
   };
+
+  document.getElementById("nothing-folder")?.addEventListener("click", function () {
+  window.location.href = "?q=create-folder"; });
 </script>
